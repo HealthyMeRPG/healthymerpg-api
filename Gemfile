@@ -16,7 +16,6 @@ gem 'oj_mimic_json' # rewrites rails to use oj
 
 # Server
 gem 'puma'
-gem 'foreman'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
