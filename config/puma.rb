@@ -1,0 +1,16 @@
+require 'pathname'
+
+threads 8,32
+workers 2
+
+tmp_path = Pathname.new(File.dirname(__FILE__)).join('..', 'tmp')
+
+socket_path = tmp_path.join('healthymerpg-puma.sock')
+state_path = tmp_path.join('healthymerpg-puma.state')
+pidfile_path = tmp_path.join('healthymerpg-puma.pid')
+
+bind "unix://#{socket_path.realdirpath}"
+state state_path.realdirpath
+pidfile pidfile_path.realdirpath
+
+preload_app!
