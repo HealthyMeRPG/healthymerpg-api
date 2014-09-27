@@ -28,6 +28,11 @@ group :development do
   gem 'rb-inotify', require: false # library for guard
   gem 'rb-fsevent', require: false # library for guard
   gem 'rb-fchange', require: false # library for guard
+
+  # deployment gems
+  gem 'capistrano',  '~> 3.1'
+  gem 'capistrano-rails', '~> 1.1'
+  gem 'capistrano-bundler', '~> 1.1.2'
 end
 
 # Development and Test
