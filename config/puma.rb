@@ -10,7 +10,9 @@ state_path = tmp_path.join('healthymerpg-puma.state')
 pidfile_path = tmp_path.join('healthymerpg-puma.pid')
 
 bind "unix://#{socket_path.realdirpath}"
-state state_path.realdirpath
+state_path state_path.realdirpath
 pidfile pidfile_path.realdirpath
+
+environment ENV['RAILS_ENV'] || 'development'
 
 preload_app!
