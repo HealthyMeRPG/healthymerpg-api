@@ -1,5 +1,5 @@
 class TrackerSerializer < ActiveModel::Serializer
   attributes :id, :tracker, :uuid
 
-  belongs_to :user
+  has_one :user
 end
