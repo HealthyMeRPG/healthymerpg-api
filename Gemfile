@@ -1,10 +1,9 @@
 source 'https://rubygems.org'
 
-
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 4.1.6'
 gem 'rails-api'
-gem 'active_model_serializers' # converts active models to JSON
+gem 'active_model_serializers', '~> 0.8.0' # converts active models to JSON
 
 # Use postgresql as the database for Active Record
 gem 'pg'
@@ -18,7 +17,10 @@ gem 'oj_mimic_json' # rewrites rails to use oj
 gem 'puma'
 
 # Use ActiveModel has_secure_password
-# gem 'bcrypt', '~> 3.1.7'
+gem 'bcrypt', '~> 3.1.7'
+
+# HTTP communication
+gem 'typhoeus', '~> 0.6.9'
 
 # Development
 group :development do
