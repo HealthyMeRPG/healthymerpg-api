@@ -9,11 +9,12 @@ class Tracker < ActiveRecord::Base
   belongs_to :user
 
   scope :active, -> { where(active: true) }
+  scope :authorized, -> { where(authorized: true) }
 
   enum tracker: [ :fitbit, :healthvault, :jawbone, :runkeeper, :withings, :fatsecret ]
 
   def self.authorization_request(tracker_type, user)
-    tracker = Tracker.create!(user: user, tracker: Tracker.trackers[tracker_type], active: true)
+    tracker = Tracker.create!(user: user, tracker: Tracker.trackers[tracker_type], active: true, authorized: false)
     tracker.authorize_url
   end
 
@@ -35,5 +36,18 @@ class Tracker < ActiveRecord::Base
     response_hash = Oj.load(response.body)
 
     raise "Failed to register tracker #{self}: #{response_hash.inspect}" if response_hash['type'] != 'AUTHORIZED'
+
+    update_attribute(:authorized, true)
+  end
+
+  def deauthorize!
+    # make the response to the Open mHealth Shim server
+    response = Typhoeus::Request.new("#{OmhShimConfig.config[:host]}/de-authorize/#{tracker}?username=#{uuid}", { method: :delete }).run
+    response_array = Oj.load(response.body)
+
+    fail 'Unable to unregister tracker' unless response_array.try(:[], 0) == 'Success: Authorization Removed.'
+
+    # set the tracker to no longer be active or authorized, and wipe the Open mHealth shim ID
+    update_attributes(authorized: false, active: false, omh_shim_id: nil)
   end
 end

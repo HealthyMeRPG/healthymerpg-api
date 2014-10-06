@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141005192443) do
+ActiveRecord::Schema.define(version: 20141006124427) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -24,9 +24,11 @@ ActiveRecord::Schema.define(version: 20141005192443) do
     t.boolean  "active"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "authorized"
   end
 
   add_index "trackers", ["active"], name: "index_trackers_on_active", using: :btree
+  add_index "trackers", ["authorized"], name: "index_trackers_on_authorized", using: :btree
   add_index "trackers", ["omh_shim_id"], name: "index_trackers_on_omh_shim_id", unique: true, using: :btree
   add_index "trackers", ["tracker"], name: "index_trackers_on_tracker", using: :btree
   add_index "trackers", ["user_id"], name: "index_trackers_on_user_id", using: :btree

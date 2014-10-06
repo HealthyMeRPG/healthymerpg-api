@@ -16,6 +16,8 @@ Rails.application.routes.draw do
           end
         end
       end
+
+      resources :trackers, only: [:index, :destroy]
     end
   end
 end
