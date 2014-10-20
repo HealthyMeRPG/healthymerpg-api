@@ -13,6 +13,14 @@ class Tracker < ActiveRecord::Base
 
   enum tracker: [ :fitbit, :healthvault, :jawbone, :runkeeper, :withings, :fatsecret ]
 
+  ENDPOINTS = {
+    steps: {
+      fitbit: 'steps',
+      jawbone: 'moves',
+      withings: 'intraday'
+    }
+  }
+
   def self.authorization_request(tracker_type, user)
     tracker = Tracker.create!(user: user, tracker: Tracker.trackers[tracker_type], active: true, authorized: false)
     tracker.authorize_url
@@ -49,5 +57,11 @@ class Tracker < ActiveRecord::Base
 
     # set the tracker to no longer be active or authorized, and wipe the Open mHealth shim ID
     update_attributes(authorized: false, active: false, omh_shim_id: nil)
+  end
+
+  def steps(start_date, end_date)
+    return 0 if [:healthvault, :runkeeper].include?(tracker)
+
+    data = TrackerData.new(self, start_date, end_date).steps
   end
 end
