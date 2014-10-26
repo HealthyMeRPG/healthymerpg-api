@@ -26,7 +26,7 @@ module Api
       private
 
       def callback_params
-        params.permit(:state, :oauth_token, :oauth_verifier)
+        params.permit(:state, :oauth_token, :oauth_verifier, :code)
       end
     end
   end
