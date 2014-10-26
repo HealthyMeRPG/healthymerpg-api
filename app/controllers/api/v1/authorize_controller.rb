@@ -11,7 +11,12 @@ module Api
         render json: { url: authorization_url }
       end
 
-      def fitbit_callback
+      def jawbone
+        authorization_url = authorization_request(:jawbone)
+        render json: { url: authorization_url }
+      end
+
+      def tracker_callback
         tracker = Tracker.active.where(omh_shim_id: callback_params[:state]).first
         tracker.authorize!(callback_params)
 

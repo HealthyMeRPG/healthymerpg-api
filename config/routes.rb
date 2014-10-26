@@ -12,7 +12,7 @@ Rails.application.routes.draw do
         collection do
           [:fitbit, :healthvault, :jawbone, :runkeeper, :withings, :fatsecret].each do |tracker|
             get tracker
-            get "#{tracker}/callback", to: "authorize##{tracker}_callback"
+            get "#{tracker}/callback", to: "authorize#tracker_callback"
           end
         end
       end
