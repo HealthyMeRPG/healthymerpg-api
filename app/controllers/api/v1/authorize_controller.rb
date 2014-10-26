@@ -4,7 +4,7 @@ module Api
     class AuthorizeController < ::ApplicationController
       include ::OmhCommunication
 
-      before_action :require_user_session!, except: [:fitbit_callback]
+      before_action :require_user_session!, except: [:tracker_callback]
 
       def fitbit
         authorization_url = authorization_request(:fitbit)
