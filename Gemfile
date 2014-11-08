@@ -20,6 +20,8 @@ gem 'puma'
 gem 'bcrypt', '~> 3.1.7'
 
 # HTTP communication
+gem 'faraday', '~> 0.9.0'
+gem 'faraday_middleware', '~> 0.9.1'
 gem 'typhoeus', '~> 0.6.9'
 
 # Development

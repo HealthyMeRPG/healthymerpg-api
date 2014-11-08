@@ -9,7 +9,13 @@ module Api
         if date.present?
           current_date = Date.parse(date)
         end
-        render json: TrackerMetrics.new(current_user.trackers.authorized, current_date, current_date)
+        authorized_trackers = current_user.trackers.authorized
+
+        response = Rails.cache.fetch("#{current_user.id}_metrics_#{authorized_trackers.count}_#{current_date.strftime('%Y-%m-%d')}", expires_in: 1.hour) do
+          TrackerMetrics.new(authorized_trackers, current_date, current_date).to_json
+        end
+
+        render json: response
       end
     end
   end
