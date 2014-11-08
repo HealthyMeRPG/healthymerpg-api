@@ -19,6 +19,7 @@ class User < ActiveRecord::Base
   # relationships
   has_many :user_sessions, -> { active }
   has_many :trackers, -> { active }
+  has_one :score
 
   ##
   # Finds a user with the given email address, and runs the `authenticate`

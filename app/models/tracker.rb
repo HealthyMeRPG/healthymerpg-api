@@ -18,6 +18,10 @@ class Tracker < ActiveRecord::Base
       fitbit: 'steps',
       jawbone: 'moves',
       withings: 'intraday'
+    },
+    activity: {
+      fitbit: 'activity',
+      jawbone: 'workouts'
     }
   }
 
@@ -63,5 +67,12 @@ class Tracker < ActiveRecord::Base
     return 0 if [:healthvault, :runkeeper].include?(tracker)
 
     data = TrackerData.new(self, start_date, end_date).steps
+  end
+
+  def activity(start_date, end_date)
+    # TODO
+    return nil if [:withings].include?(tracker)
+
+    data = TrackerData.new(self, start_date, end_date).activity
   end
 end

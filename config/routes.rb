@@ -24,6 +24,8 @@ Rails.application.routes.draw do
           get 'metrics'
         end
       end
+
+      resources :scores, only: [:show]
     end
   end
 end

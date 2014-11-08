@@ -6,6 +6,7 @@ module Api
       def create
         user = User.new(register_params)
         if user.save
+          user.create_score(stamina: 90, strength: 90, mind: 90, vitality: 90, agility: 90)
           render json: user, status: 201
         else
           render json: { errors: user.errors.full_messages }, status: 422
