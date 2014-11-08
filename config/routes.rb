@@ -26,6 +26,8 @@ Rails.application.routes.draw do
       end
 
       resources :scores, only: [:show]
+
+      resources :quests, only: [:index]
     end
   end
 end

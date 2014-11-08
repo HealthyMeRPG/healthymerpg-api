@@ -11,10 +11,23 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141108163701) do
+ActiveRecord::Schema.define(version: 20141108193944) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "quests", force: true do |t|
+    t.string   "title"
+    t.integer  "stamina_reward"
+    t.integer  "strength_reward"
+    t.integer  "mind_reward"
+    t.integer  "vitality_reward"
+    t.integer  "agility_reward"
+    t.integer  "activity"
+    t.integer  "activity_amount"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "scores", force: true do |t|
     t.integer  "stamina"
