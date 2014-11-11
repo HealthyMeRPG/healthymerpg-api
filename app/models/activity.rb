@@ -23,6 +23,8 @@ class Activity < ActiveRecord::Base
   end
 
   def finalize!
+    return if finalized?
+
     update_activity!
     update_attributes!(finalized: true)
   end
