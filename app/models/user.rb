@@ -17,6 +17,7 @@ class User < ActiveRecord::Base
   validates :password_confirmation, presence: true, on: :create
 
   # relationships
+  has_many :activities
   has_many :user_sessions, -> { active }
   has_many :trackers, -> { active }
   has_one :score

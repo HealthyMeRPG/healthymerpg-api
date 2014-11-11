@@ -18,16 +18,9 @@ Rails.application.routes.draw do
       end
 
       resources :trackers, only: [:index, :destroy]
-
-      resources :dashboard, only: [] do
-        collection do
-          get 'metrics'
-        end
-      end
-
       resources :scores, only: [:show]
-
       resources :quests, only: [:index]
+      resources :activities, only: [:index]
     end
   end
 end

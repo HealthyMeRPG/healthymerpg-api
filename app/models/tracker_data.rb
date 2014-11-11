@@ -4,10 +4,9 @@ class TrackerData
   include TrackerDataFitbit
   include TrackerDataJawbone
 
-  def initialize(tracker, start_date, end_date)
+  def initialize(tracker, activity_date)
     @tracker = tracker
-    @start_date = start_date
-    @end_date = end_date
+    @activity_date = activity_date
   end
 
   def steps
@@ -29,8 +28,8 @@ class TrackerData
   def url_for(type)
     parameters = {
       username: @tracker.uuid,
-      dateStart: @start_date.strftime('%Y-%m-%d'),
-      dateEnd: @end_date.strftime('%Y-%m-%d')
+      dateStart: @activity_date.strftime('%Y-%m-%d'),
+      dateEnd: @activity_date.strftime('%Y-%m-%d')
     }
 
     if can_normalize?(type)

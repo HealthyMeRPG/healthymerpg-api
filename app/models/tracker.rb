@@ -63,16 +63,16 @@ class Tracker < ActiveRecord::Base
     update_attributes(authorized: false, active: false, omh_shim_id: nil)
   end
 
-  def steps(start_date, end_date)
+  def steps(activity_date)
     return 0 if [:healthvault, :runkeeper].include?(tracker)
 
-    data = TrackerData.new(self, start_date, end_date).steps
+    data = TrackerData.new(self, activity_date).steps
   end
 
-  def activity(start_date, end_date)
+  def activity(activity_date)
     # TODO
     return nil if [:withings].include?(tracker)
 
-    data = TrackerData.new(self, start_date, end_date).activity
+    data = TrackerData.new(self, activity_date).activity
   end
 end
