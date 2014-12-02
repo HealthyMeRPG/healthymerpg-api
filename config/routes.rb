@@ -21,6 +21,7 @@ Rails.application.routes.draw do
       resources :scores, only: [:show]
       resources :quests, only: [:index]
       resources :activities, only: [:index]
+      resources :score_histories, only: [:index]
     end
   end
 end
